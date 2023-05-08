@@ -1,4 +1,4 @@
-<h1 align="center">GET_NEXT_LINE</h1>
+<h1 align="center">PUSH_SWAP</h1>
 
 <p align="center">
     <img alt="score" src="https://img.shields.io/static/v1?label=status&message=ongoing&color=red&logo=42&logoColor=green">
