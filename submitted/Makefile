@@ -1,5 +1,5 @@
 NAME=push_swap
-SRC=
+SRC=push_swap.c
 CC=cc
 RM=/bin/rm -f
 CFLAGS=-Wall -Wextra -Werror
