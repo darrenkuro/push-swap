@@ -6,14 +6,18 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:21:00 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/13 20:22:02 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/14 22:45:46 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdio.h>
-int main(int ac, char **av)
+#include <stdint.h>
+
+int main(void)
 {
-	if (ac > 1)
-		printf("%s\n", av[1]);
+	//if (ac > 1)
+	//	printf("%s\n", av[1]);
+	printf("%p\n", calloc(SIZE_MAX, SIZE_MAX));
 	return (0);
 }
