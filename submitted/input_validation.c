@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 21:19:40 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/14 21:44:30 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/15 00:49:52 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ int	input_sorted(int *arr, int size)
 			return (0);
 	return (1);
 }
+
+/* Parse the input into the array, return size, or 0 if failed. */
+int	input_parse(char **av, int **arr)
+{
+	
+}
+
+/*
 #include <stdlib.h>
 #include <stdio.h>
 int	main(int ac, char **av)
@@ -33,3 +41,4 @@ int	main(int ac, char **av)
 	printf("result: %d\n", input_sorted(test, ac - 1));
 	return (0);
 }
+*/
