@@ -8,3 +8,5 @@
     <img alt="file" src="https://img.shields.io/github/directory-file-count/darrenkuro/42_push_swap/submitted?label=files">
     <img alt="commit" src="https://img.shields.io/github/last-commit/darrenkuro/42_push_swap">
 </p>
+
+- Test in bash so ARG is parsed as multiple arguments; in zsh it's parsed as 1.

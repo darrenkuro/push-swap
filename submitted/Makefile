@@ -1,15 +1,17 @@
 NAME=push_swap
-SRC=push_swap.c
+SRC=push_swap_test.c op_print.c sort_simple.c input.c
+LIBDIR=libft
 CC=cc
 RM=/bin/rm -f
 CFLAGS=-Wall -Wextra -Werror
 OBJ=$(SRC:.c=.o)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+	@make -C $(LIBDIR) all >/dev/null
+	$(CC) $(CFLAGS) -o $@ $^ -L $(LIBDIR) -lft -I $(LIBDIR)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $< -I $(LIBDIR)
 
 all: $(NAME)
 
