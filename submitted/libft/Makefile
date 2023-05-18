@@ -8,7 +8,8 @@ SRC=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c ft_putendl_fd.c \
 	ft_lstnew.c ft_lstsize.c ft_lstadd_front.c ft_lstadd_back.c \
 	ft_lstlast.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
-	ft_printf.c parse_format.c parse_nbr.c print.c utils.c
+	ft_printf.c ft_printf_parse_format.c ft_printf_parse_nbr.c \
+	ft_printf_print.c ft_printf_utils.c
 CC=cc
 RM=/bin/rm -f
 CFLAGS=-Wall -Wextra -Werror
