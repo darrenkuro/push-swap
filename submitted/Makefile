@@ -1,5 +1,5 @@
 NAME=push_swap
-SRC=push_swap_test.c op_print.c sort_simple.c input.c
+SRC=push_swap.c op_print.c sort_simple.c input.c
 LIBDIR=libft
 CC=cc
 RM=/bin/rm -f
