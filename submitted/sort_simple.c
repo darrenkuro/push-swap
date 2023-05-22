@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:08 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/17 14:28:27 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/20 22:56:55 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	sort_two(t_ui *arr, t_list **op)
 }
 
 /* */
-void	sort_three(t_ui *arr, t_list **op)
+void	sort_three(t_ui *arr, t_data *data, int write)
 {
 	if (arr[2] > arr[0] && arr[0] > arr[1])
-		ft_lstadd_back(op, ft_lstnew("sa"));
+		op_exec_sa(data, write);
 	else if (arr[1] > arr[0] && arr[0] > arr[2])
-		ft_lstadd_back(op, ft_lstnew("rra"));
+		op_exec_rra(data, write);
 	else if (arr[0] > arr[2] && arr[2] > arr[1])
-		ft_lstadd_back(op, ft_lstnew("ra"));
+		op_exec_ra(data, write);
 	else if (arr[0] > arr[1] && arr[1] > arr[2])
 	{
 		ft_lstadd_back(op, ft_lstnew("sa"));

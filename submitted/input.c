@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 21:19:40 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/17 00:20:47 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/20 22:15:04 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,12 @@ int	input_isunique(int ac, char **av)
 }
 
 /*  */
-t_list	*input_parser(int ac, char **av, t_list **stack)
+void	input_parser(int ac, char **av, t_data *data)
 {
 	int		i;
 	int		j;
 	t_ui	count;
-	t_ui	*temp;
 
-	//ret = (t_ui *) ft_calloc(ac - 1, sizeof(t_ui));
-	//if (!ret)
-	//	return (NULL);
 	i = -1;
 	while (++i < ac - 1)
 	{
@@ -111,12 +107,6 @@ t_list	*input_parser(int ac, char **av, t_list **stack)
 		while (++j < ac - 1)
 			if (ft_atoi(av[i + 1]) > ft_atoi(av[j + 1]))
 				++count;
-		temp = (t_ui *) malloc(sizeof(t_ui));
-		if (!temp)
-			// handle free with lstclear
-			return (NULL);
-		*temp = count;
-		ft_lstadd_back(stack, ft_lstnew(temp));
+		data->a[i] = count;
 	}
-	return (*stack);
 }

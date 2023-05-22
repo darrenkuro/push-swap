@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/17 00:20:44 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/20 22:52:17 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,27 @@ typedef unsigned int	t_ui;
 
 typedef struct s_data
 {
-	t_list	*a;
-	t_list	*b;
+	t_ui	*a;
+	t_ui	*b;
 	t_list	*op;
 	int		size_a;
 	int		size_b;
-	int		size_op;
 }	t_data;
+
+void	op_exec_pa(t_data *data, int write);
+void	op_exec_pb(t_data *data, int write);
+void	op_exec_ra(t_data *data, int write);
+void	op_exec_rb(t_data *data, int write);
+void	op_exec_rr(t_data *data, int write);
+void	op_exec_rra(t_data *data, int write);
+void	op_exec_rrb(t_data *data, int write);
+void	op_exec_rrr(t_data *data, int write);
 
 int		input_issorted(int ac, char **av);
 int		input_isnum(int ac, char **av);
 int		input_isint(int ac, char **av);
 int		input_isunique(int ac, char **av);
-t_list	*input_parser(int ac, char **av, t_list **stack);
+void	input_parser(int ac, char **av, t_data *data);
 void	sort_three(unsigned int *arr, t_list **op);
 void	sort_five(unsigned int *arr, t_list **op);
 int		op_print(t_list *op);
