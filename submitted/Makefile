@@ -16,9 +16,11 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 clean:
+	@make -C $(LIBDIR) clean >/dev/null
 	$(RM) $(OBJ)
 
 fclean: clean
+	@make -C $(LIBDIr) fclean >/dev/null
 	$(RM) $(NAME)
 
 re: fclean all

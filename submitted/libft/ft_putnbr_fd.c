@@ -6,15 +6,15 @@
 /*   By: dlu <dlu@42berlin.de>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 01:58:27 by dlu               #+#    #+#             */
-/*   Updated: 2023/04/26 01:44:28 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/18 17:10:54 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
 
-#define BASE		10
-#define INT_MIN_STR	"-2147483648"
+#define BASE 10
+#define INT_MIN_STR "-2147483648"
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -35,16 +35,3 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n % BASE, fd);
 	}
 }
-
-/* ////
-#include <fcntl.h>
-
-int	main()
-{
-	int fd = open("test", O_RDWR | O_APPEND);
-
-	ft_putnbr_fd(-123, fd);
-	close(fd);
-	return (0);
-}
-*/ ////
