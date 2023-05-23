@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2023/05/23 12:29:17 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/23 14:19:29 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS	:=	checker
 SRCDIR	:=	srcs
 
 _SRC	:=	push_swap.c op_print.c sort_simple.c input.c
-_BSRC	:=	checker_bonus.c
+_BSRC	:=	checker_bonus.c input.c op_exec1.c op_exec2.c op_exec3.c utils.c
 SRC		:=	$(addprefix $(SRCDIR)/, $(_SRC))
 BSRC	:=	$(addprefix $(SRCDIR)/, $(_BSRC))
 
@@ -39,7 +39,7 @@ $(NAME): libft $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) -L $(LIBDIR) -lft -I $(LIBDIR)
 
 $(BONUS): libft $(BOBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) -L $(LIBDIR) -lft -I $(LIBDIR)
+	$(CC) $(CFLAGS) -o $@ $(BOBJ) -L $(LIBDIR) -lft -I $(LIBDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $< -I $(LIBDIR)
