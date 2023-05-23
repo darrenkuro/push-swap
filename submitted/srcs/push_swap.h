@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/23 14:18:03 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/23 16:47:50 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ int		input_isnum(int ac, char **av);
 int		input_isint(int ac, char **av);
 int		input_isunique(int ac, char **av);
 void	input_parser(int ac, char **av, t_data *data);
-void	sort_three(unsigned int *arr, t_list **op);
-void	sort_five(unsigned int *arr, t_list **op);
+void	sort_three(t_data *data, int write);
+void	sort_four(t_data *data, int write);
+void	sort_five(t_data *data, int write);
+void	sort_large(t_data *data, int write);
 int		op_print(t_list *op);
 
 void	print_error(const char *msg);

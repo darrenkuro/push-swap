@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2023/05/23 14:19:29 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/23 16:37:37 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ BONUS	:=	checker
 
 SRCDIR	:=	srcs
 
-_SRC	:=	push_swap.c op_print.c sort_simple.c input.c
+_SRC	:=	push_swap.c utils.c input.c op_exec1.c op_exec2.c op_exec3.c \
+			sort_simple.c
 _BSRC	:=	checker_bonus.c input.c op_exec1.c op_exec2.c op_exec3.c utils.c
 SRC		:=	$(addprefix $(SRCDIR)/, $(_SRC))
 BSRC	:=	$(addprefix $(SRCDIR)/, $(_BSRC))
