@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlu <dlu@42berlin.de>                      +#+  +:+       +#+        */
+/*   By: dlu<dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 22:28:32 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/18 16:39:14 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/23 11:36:01 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 # define LIBFT_H
 
 # include <stddef.h>
-# include "ft_printf.h"
+# include <stdlib.h>
+# include <limits.h>
+# include <stdarg.h>
+# include <unistd.h>
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-typedef unsigned char	t_uc;
+typedef unsigned char		t_uc;
+typedef unsigned int		t_ui;
+typedef unsigned long long	t_ull;
+typedef long long			t_ll;
+
+# define DEC		"0123456789"
+# define HEXU		"0123456789ABCDEF"
+# define HEXL		"0123456789abcdef"
+# define NULL_STR	"(null)"
+# define NULL_PTR	"(nil)"
+
+/* Basic functions. */
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -58,6 +67,14 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
+/* Linked list. */
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
 int		ft_lstsize(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -67,5 +84,36 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/* Printf. */
+
+typedef struct s_format
+{
+	t_ll	nbr;
+	char	type;
+	char	padding;
+	char	*num;
+	int		hash;
+	int		minus;
+	int		plus;
+	int		space;
+	int		dot;
+	int		zero;
+	int		width;
+	int		precision;
+	int		base;
+	int		signed_nbr;
+}	t_format;
+
+int		ft_printf(const char *s, ...);
+int		ft_strlenf(char *s, t_format format);
+int		print_padding(char c, int len);
+int		print_str(char *s, int *count, t_format format);
+void	print_char(char c, int *count, t_format format);
+void	print_ptr(void *p, int *count, t_format format);
+void	print_arg(va_list *args, int *count, t_format format);
+void	print_nbr(t_ll n, const char *base, int *count, t_format format);
+void	parse_nbr(t_ll n, const char *base, t_format *format);
+void	parse_format(char **s, va_list *args, t_format *format);
 
 #endif
