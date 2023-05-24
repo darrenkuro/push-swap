@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:24:29 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/24 23:58:13 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 01:00:28 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,12 @@ static void	sort(t_data *data)
 		op_exec_ra(data, TRUE);
 	else if (data->size_a == 3)
 		sort_three(data, TRUE);
-	else if (data->size_a == 4)
+	else if (data->size_a == 5)
+		sort_five(data, TRUE);
+	else if (data->size_a <= 31)
 		sort_radix(data, TRUE);
-	//	sort_four(data, TRUE);
-	//else if (data->size_a == 5)
-	//	sort_five(data, TRUE);
 	else
-		sort_radix(data, TRUE);
+		sort_large(data, )
 }
 
 int	main(int ac, char **av)

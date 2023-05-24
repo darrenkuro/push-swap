@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:43 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/24 20:58:36 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 01:02:41 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_digit(t_ui *arr, int size)
 }
 
 /* */
-static int	a_sorted(t_data *data)
+static int	rest_sorted(t_data *data)
 {
 	int	i;
 
@@ -59,7 +59,7 @@ int	sort_radix(t_data *data, int write)
 		j = -1;
 		while (++j < size)
 		{
-			if (a_sorted(data))
+			if (rest_sorted(data))
 				break ;
 			else if ((data->a[0] >> i) & 1)
 				op_exec_ra(data, write);
@@ -69,13 +69,5 @@ int	sort_radix(t_data *data, int write)
 		while (data->size_b)
 			op_exec_pa(data, write);
 	}
-	return (1);
+	return (TRUE);
 }
-/*
-int	main(void)
-{
-	t_ui	test[] = {16, 1, 7, 0, 12};
-	ft_printf("%d\n", get_digit(test, 5));
-	return (0);
-}
-*/

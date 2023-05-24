@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/24 23:10:32 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 01:10:43 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@
 # define STDIN		0
 # define STDERR		2
 # define ERROR_MSG	"Error\n"
-# define MAX_SORT	4
+# define MAX_SORT	3
+# define SMALL_I	0
+# define RADIX_I	1
+# define CALC_I		2
 
 typedef struct s_data
 {
@@ -34,28 +37,28 @@ typedef struct s_data
 	int		size_b;
 }	t_data;
 
-int		op_exec_pa(t_data *data, int write);
-int		op_exec_pb(t_data *data, int write);
-int		op_exec_sa(t_data *data, int write);
-int		op_exec_sb(t_data *data, int write);
-int		op_exec_ss(t_data *data, int write);
-int		op_exec_ra(t_data *data, int write);
-int		op_exec_rb(t_data *data, int write);
-int		op_exec_rr(t_data *data, int write);
-int		op_exec_rra(t_data *data, int write);
-int		op_exec_rrb(t_data *data, int write);
-int		op_exec_rrr(t_data *data, int write);
+int		op_exec_pa(t_data *data, int index);
+int		op_exec_pb(t_data *data, int index);
+int		op_exec_sa(t_data *data, int index);
+int		op_exec_sb(t_data *data, int index);
+int		op_exec_ss(t_data *data, int index);
+int		op_exec_ra(t_data *data, int index);
+int		op_exec_rb(t_data *data, int index);
+int		op_exec_rr(t_data *data, int index);
+int		op_exec_rra(t_data *data, int index);
+int		op_exec_rrb(t_data *data, int index);
+int		op_exec_rrr(t_data *data, int index);
 
 int		input_issorted(int ac, char **av);
 int		input_isnum(int ac, char **av);
 int		input_isint(int ac, char **av);
 int		input_isunique(int ac, char **av);
 void	input_parser(int ac, char **av, t_data *data);
-void	sort_three(t_data *data, int write);
-void	sort_five(t_data *data, int write);
-void	sort_ordered(t_data *data, int write);
-void	sort_large(t_data *data, int write);
-int		sort_radix(t_data *data, int write);
+void	sort_three(t_data *data, int index);
+void	sort_five(t_data *data, int index);
+void	sort_ordered(t_data *data, int index);
+void	sort_large(t_data *data, int index);
+int		sort_radix(t_data *data, int index);
 int		op_print(t_list *op);
 
 void	print_error(const char *msg);
