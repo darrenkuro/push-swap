@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:00:54 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/23 14:17:47 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/24 11:59:22 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	op_exec_pa(t_data *data, int write)
 		data->b[i] = data->b[i + 1];
 	(data->size_a)++;
 	(data->size_b)--;
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("pa"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("pa"));
 	return (1);
 }
 
@@ -49,8 +48,7 @@ int	op_exec_pb(t_data *data, int write)
 		data->a[i] = data->a[i + 1];
 	(data->size_b)++;
 	(data->size_a)--;
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("pb"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("pb"));
 	return (1);
 }
 
@@ -64,8 +62,7 @@ int	op_exec_sa(t_data *data, int write)
 	temp = data->a[0];
 	data->a[0] = data->a[1];
 	data->a[1] = temp;
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("sa"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("sa"));
 	return (1);
 }
 
@@ -79,8 +76,7 @@ int	op_exec_sb(t_data *data, int write)
 	temp = data->b[0];
 	data->b[0] = data->b[1];
 	data->b[1] = temp;
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("sb"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("sb"));
 	return (1);
 }
 
@@ -91,7 +87,6 @@ int	op_exec_ss(t_data *data, int write)
 		return (0);
 	op_exec_sa(data, FALSE);
 	op_exec_sb(data, FALSE);
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("ss"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("ss"));
 	return (1);
 }

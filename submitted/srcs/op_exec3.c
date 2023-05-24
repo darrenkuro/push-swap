@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:00:54 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/23 14:38:23 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/24 12:00:28 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	op_exec_rra(t_data *data, int write)
 	while (--i > 0)
 		data->a[i] = data->a[i - 1];
 	data->a[0] = tmp;
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("rra"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("rra"));
 	return (1);
 }
 
@@ -43,8 +42,7 @@ int	op_exec_rrb(t_data *data, int write)
 	while (--i > 0)
 		data->b[i] = data->b[i - 1];
 	data->b[0] = tmp;
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("rrb"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("rrb"));
 	return (1);
 }
 
@@ -55,7 +53,6 @@ int	op_exec_rrr(t_data *data, int write)
 		return (0);
 	op_exec_rra(data, 0);
 	op_exec_rrb(data, 0);
-	if (write)
-		ft_lstadd_back(&data->op, ft_lstnew("rrr"));
+	ft_lstadd_back(&data->op[write], ft_lstnew("rrr"));
 	return (1);
 }

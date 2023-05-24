@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/23 16:47:50 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/24 11:56:29 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@
 # define STDIN		0
 # define STDERR		2
 # define ERROR_MSG	"Error\n"
+# define MAX_SORT	4
 
 typedef struct s_data
 {
 	t_ui	*a;
 	t_ui	*b;
-	t_list	*op;
+	t_list	*op[MAX_SORT];
 	int		size_a;
 	int		size_b;
 }	t_data;
@@ -54,6 +55,7 @@ void	sort_three(t_data *data, int write);
 void	sort_four(t_data *data, int write);
 void	sort_five(t_data *data, int write);
 void	sort_large(t_data *data, int write);
+int		sort_radix(t_data *data, int write);
 int		op_print(t_list *op);
 
 void	print_error(const char *msg);
