@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:00:54 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/24 11:59:22 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/24 17:31:51 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int	op_exec_pb(t_data *data, int write)
 		data->b[i + 1] = data->b[i];
 	data->b[0] = data->a[0];
 	i = -1;
-	while (++i < data->size_a)
+	while (++i < data->size_a - 1)
 		data->a[i] = data->a[i + 1];
+	data->a[i] = 0;
 	(data->size_b)++;
 	(data->size_a)--;
 	ft_lstadd_back(&data->op[write], ft_lstnew("pb"));

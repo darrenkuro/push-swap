@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 12:01:08 by dlu               #+#    #+#              #
-#    Updated: 2023/05/24 15:01:44 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/24 17:20:35 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,15 +33,12 @@ OBJ		:=	$(addprefix $(OBJDIR)/, $(_SRC:.c=.o))
 CC		:=	cc
 AR		:=	ar rcs
 RM		:=	/bin/rm -f
-CFLAGS	:=	-Wall -Wextra -Werror
+CFLAGS	:=	-Wall -Wextra -Werror -g
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OSINFO)
-	$(AR) $@ $(OBJ)
-
-$(OSINFO):
-	@echo $(shell uname -s) > $(OSINFO)
+$(NAME): $(OBJ)
+	$(AR) $@ $^
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $< -I .

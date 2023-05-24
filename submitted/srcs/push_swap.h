@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/24 11:56:29 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/24 23:10:32 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,17 @@ int		input_isint(int ac, char **av);
 int		input_isunique(int ac, char **av);
 void	input_parser(int ac, char **av, t_data *data);
 void	sort_three(t_data *data, int write);
-void	sort_four(t_data *data, int write);
 void	sort_five(t_data *data, int write);
+void	sort_ordered(t_data *data, int write);
 void	sort_large(t_data *data, int write);
 int		sort_radix(t_data *data, int write);
 int		op_print(t_list *op);
 
 void	print_error(const char *msg);
 int		data_init(int ac, char **av, t_data *data);
+int		get_shortest_op_index(t_data *data);
+
+void	optimize_op(t_list *op);
+int		a_isordered(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 12:35:39 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/23 14:58:33 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 00:00:06 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	op_exec(t_data *data, char *op)
 	else if (ft_strncmp(op, "rrr", MAX_OP_CHAR) == 0)
 		return (op_exec_rrr(data, FALSE));
 	else
-		return (0);
+		return (FALSE);
 }
 
 static void	load_args(int ac, char **av, t_data *data)
@@ -48,15 +48,9 @@ static void	load_args(int ac, char **av, t_data *data)
 	if (ac == 1)
 		exit(FAILURE);
 	if (!input_isnum(ac, av) || !input_isint(ac, av) || !input_isunique(ac, av))
-	{
 		print_error(ERROR_MSG);
-		exit(FAILURE);
-	}
 	if (!data_init(ac, av, data))
-	{
 		print_error(ERROR_MSG);
-		exit(FAILURE);
-	}
 }
 
 /* Check whether data is successfully sorted. 1 if sorted, 0 if it's not. */
@@ -69,8 +63,8 @@ static int	check_sorted(t_data *data)
 	i = -1;
 	while (++i < data->size_a - 1)
 		if (data->a[i] > data->a[i + 1])
-			return (0);
-	return (1);
+			return (FALSE);
+	return (TRUE);
 }
 
 int	main(int ac, char **av)

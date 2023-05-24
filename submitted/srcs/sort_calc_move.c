@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   sort_calc_move.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 11:12:34 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/24 17:30:04 by dlu              ###   ########.fr       */
+/*   Created: 2023/05/24 23:28:24 by dlu               #+#    #+#             */
+/*   Updated: 2023/05/24 23:55:15 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.c"
 
-void	*ft_calloc(size_t count, size_t size)
+/* Calculate the move needed for index in stack a to the correct position. */
+int	calc_move(t_data *data, int index)
 {
-	void	*ret;
+	int	pos_b;
 
-	if (size && count && (count * size < size || count * size < count))
-		return (NULL);
-	ret = malloc(count * size);
-	if (!ret)
-		return (NULL);
-	ft_bzero(ret, count * size);
-	return (ret);
+	pos_b = -1;
+	while (++i < data->size_a)
+
+}
+
+int	cheapest_index(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->size_a)
+
 }

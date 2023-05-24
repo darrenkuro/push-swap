@@ -6,11 +6,27 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:08 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/23 16:47:39 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/24 23:14:36 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/* Sort stack that's already ordered and only needs rotating. */
+void	sort_ordered(t_data *data, int write)
+{
+	int	i;
+
+	i = 0;
+	while (data->a[i] != 0)
+		i++;
+	if (i < data->size_a / 2)
+		while (data->a[0] != 0)
+			op_exec_ra(data, write);
+	else
+		while (data->a[0] != 0)
+			op_exec_rra(data, write);
+}
 
 /* */
 void	sort_three(t_data *data, int write)
