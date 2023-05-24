@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2023/05/24 11:33:43 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/24 14:46:42 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME	:=	push_swap
 BONUS	:=	checker
 
 SRCDIR	:=	srcs
-
 _SRC	:=	push_swap.c utils.c input.c op_exec1.c op_exec2.c op_exec3.c \
 			sort_simple.c sort_radix.c
 _BSRC	:=	checker_bonus.c input.c op_exec1.c op_exec2.c op_exec3.c utils.c

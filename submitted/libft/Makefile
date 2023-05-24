@@ -6,11 +6,12 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 12:01:08 by dlu               #+#    #+#              #
-#    Updated: 2023/05/23 12:13:53 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/24 15:01:44 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	libft.a
+OSINFO	:=	.info_build
 
 SRCDIR	:=	srcs
 _SRC	:=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
@@ -36,8 +37,11 @@ CFLAGS	:=	-Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(AR) $@ $^
+$(NAME): $(OBJ) $(OSINFO)
+	$(AR) $@ $(OBJ)
+
+$(OSINFO):
+	@echo $(shell uname -s) > $(OSINFO)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $< -I .
@@ -46,7 +50,7 @@ clean:
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(OSINFO)
 
 re: fclean all
 
