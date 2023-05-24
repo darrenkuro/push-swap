@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:24:29 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 01:00:28 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 01:34:48 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ static void	sort(t_data *data)
 	if (a_isordered(data))
 		sort_ordered(data, 0);
 	else if (data->size_a == 2)
-		op_exec_ra(data, TRUE);
+		op_exec_ra(data, SMALL_I);
 	else if (data->size_a == 3)
-		sort_three(data, TRUE);
-	else if (data->size_a == 5)
-		sort_five(data, TRUE);
+		sort_three(data, SMALL_I);
+	//else if (data->size_a == 5)
+	//	sort_five(data, TRUE);
 	else if (data->size_a <= 31)
-		sort_radix(data, TRUE);
-	else
-		sort_large(data, )
+		sort_radix(data, RADIX_I);
+	//else
+	//	sort_large(data, )
 }
 
 int	main(int ac, char **av)
@@ -60,11 +60,11 @@ int	main(int ac, char **av)
 	if (ac == 1)
 		return (FAILURE);
 	if (!input_isnum(ac, av) || !input_isint(ac, av) || !input_isunique(ac, av))
-		print_error(ERROR_MSG);
-	if (input_issorted(ac, av))
-		return (SUCCESS);
+		print_error_exit(ERROR_MSG);
 	if (!data_init(ac, av, &data))
-		print_error(ERROR_MSG);
+		print_error_exit(ERROR_MSG);
+	if (array_issorted(data.a, data.size_a))
+		return (SUCCESS);
 	sort(&data);
 	print_free(&data);
 	return (SUCCESS);

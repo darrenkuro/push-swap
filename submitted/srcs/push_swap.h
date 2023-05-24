@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 01:10:43 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 01:38:40 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MAX_SORT	3
 # define SMALL_I	0
 # define RADIX_I	1
-# define CALC_I		2
+# define LARGE_I	2
 
 typedef struct s_data
 {
@@ -49,7 +49,6 @@ int		op_exec_rra(t_data *data, int index);
 int		op_exec_rrb(t_data *data, int index);
 int		op_exec_rrr(t_data *data, int index);
 
-int		input_issorted(int ac, char **av);
 int		input_isnum(int ac, char **av);
 int		input_isint(int ac, char **av);
 int		input_isunique(int ac, char **av);
@@ -59,13 +58,13 @@ void	sort_five(t_data *data, int index);
 void	sort_ordered(t_data *data, int index);
 void	sort_large(t_data *data, int index);
 int		sort_radix(t_data *data, int index);
-int		op_print(t_list *op);
 
-void	print_error(const char *msg);
+void	print_error_exit(const char *msg);
 int		data_init(int ac, char **av, t_data *data);
 int		get_shortest_op_index(t_data *data);
 
 void	optimize_op(t_list *op);
+int		array_issorted(t_ui *arr, int size);
 int		a_isordered(t_data *data);
 
 #endif

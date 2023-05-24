@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   optimize_shortcut.c                                :+:      :+:    :+:   */
+/*   sort_large.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 21:00:41 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 01:33:08 by dlu              ###   ########.fr       */
+/*   Created: 2023/05/25 01:35:03 by dlu               #+#    #+#             */
+/*   Updated: 2023/05/25 01:43:45 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* Checked if stack a is already ordered only with the incorrect first int. */
-int	a_isordered(t_data *data)
+static void	sort_onto_b(t_data *data)
 {
-	int	peak;
-	int	i;
-
-	peak = 0;
-	i = -1;
-	while (++i < data->size_a - 1)
+	op_exec_pb(data, LARGE_I);
+	op_exec_pb(data, LARGE_I);
+	while (data->size_a > 3 && !array_issorted(data->a, data->size_a))
 	{
-		if (data->a[i] > data->a[i + 1])
-			++peak;
+		
 	}
-	if (data->a[i] > data->a[0])
-		++peak;
-	if (peak == 1)
-		return (TRUE);
-	else
-		return (FALSE);
+}
+
+void	sort_large(t_data *data)
+{
+	
 }

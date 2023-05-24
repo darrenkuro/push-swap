@@ -6,20 +6,11 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 21:19:40 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 00:56:41 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 01:27:36 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/* Check whether input is already sorted. */
-int	input_issorted(int ac, char **av)
-{
-	while (--ac > 0)
-		if (ft_atoi(av[ac]) < ft_atoi(av[ac - 1]))
-			return (FALSE);
-	return (TRUE);
-}
 
 /* Check whether input is all numbers. */
 int	input_isnum(int ac, char **av)
@@ -92,7 +83,7 @@ int	input_isunique(int ac, char **av)
 	return (free(input), TRUE);
 }
 
-/*  */
+/* Parse input into stack a based on their rank. */
 void	input_parser(int ac, char **av, t_data *data)
 {
 	int		i;

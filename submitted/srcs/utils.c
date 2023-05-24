@@ -6,14 +6,14 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:15:26 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/24 23:58:55 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 01:30:01 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /* Print the given message to stderr and exit the program. */
-void	print_error(const char *msg)
+void	print_error_exit(const char *msg)
 {
 	write(STDERR, msg, ft_strlen(msg));
 	exit(FAILURE);
@@ -60,4 +60,13 @@ int	get_shortest_op_index(t_data *data)
 		}
 	}
 	return (index);
+}
+
+/* Check if an array is sorted of it's given size. */
+int	array_issorted(t_ui *arr, int size)
+{
+	while (--size > 0)
+		if (arr[size] < arr[size - 1])
+			return (FALSE);
+	return (TRUE);
 }
