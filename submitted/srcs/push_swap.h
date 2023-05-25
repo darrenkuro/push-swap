@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 01:45:09 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 12:17:41 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@
 # define STDIN		0
 # define STDERR		2
 # define ERROR_MSG	"Error\n"
-# define MAX_SORT	3
+# define MAX_SORT	4
 # define SMALL_I	0
 # define RADIX_I	1
 # define LARGE_I	2
+# define RARB		1
+# define RRARRB		2
+# define RRARB		3
+# define RARRB		4
 
 typedef struct s_data
 {
@@ -56,7 +60,7 @@ void	input_parser(int ac, char **av, t_data *data);
 void	sort_three(t_data *data, int index);
 void	sort_five(t_data *data, int index);
 void	sort_ordered(t_data *data, int index);
-void	sort_large(t_data *data, int index);
+void	sort_large(t_data *data, int n, int f);
 int		sort_radix(t_data *data, int index);
 
 void	print_error_exit(const char *msg);
@@ -66,5 +70,13 @@ int		get_shortest_op_index(t_data *data);
 void	optimize_op(t_list *op);
 int		array_issorted(t_ui *arr, int size);
 int		a_isordered(t_data *data);
+
+t_ui	get_max(t_ui *arr, int size);
+t_ui	get_min(t_ui *arr, int size);
+int		get_max_index(t_ui *arr, int size);
+int		get_min_index(t_ui *arr, int size);
+
+int		push_index_ab(t_ui *arr, int size, t_ui nbr);
+int		push_index_ba(t_ui *arr, int size, t_ui nbr);
 
 #endif

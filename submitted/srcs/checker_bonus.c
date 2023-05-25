@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 12:35:39 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 01:27:27 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 05:40:59 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	op_exec(t_data *data, char *op)
 		return (FALSE);
 }
 
+/* Check the validity of the arguments, load stack if valid, exit if invalid. */
 static void	load_args(int ac, char **av, t_data *data)
 {
 	if (ac == 1)

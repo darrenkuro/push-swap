@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2023/05/24 23:05:56 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/25 12:28:15 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ NAME	:=	push_swap
 BONUS	:=	checker
 
 SRCDIR	:=	srcs
-_SRC	:=	push_swap.c utils.c input.c \
+_SRC	:=	push_swap.c \
+			utils.c utils_push.c utils_limit.c input.c \
 			op_exec1.c op_exec2.c op_exec3.c \
-			sort_simple.c sort_radix.c \
+			sort_simple.c sort_radix.c sort_large.c \
 			optimize_op.c optimize_shortcut.c
 _BSRC	:=	checker_bonus.c input.c op_exec1.c op_exec2.c op_exec3.c utils.c
 SRC		:=	$(addprefix $(SRCDIR)/, $(_SRC))
@@ -33,7 +34,8 @@ LIBFT	:=	libft.a
 
 CC		:=	cc
 RM		:=	/bin/rm -f
-CFLAGS	:=	-Wall -Wextra -Werror -g
+CFLAGS	:=	
+#-Wall -Wextra -Werror -g
 
 all: $(NAME) $(BONUS)
 

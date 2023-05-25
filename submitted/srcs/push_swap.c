@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:24:29 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 01:34:48 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 12:29:23 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	print_free(t_data *data)
 	int		index;
 
 	index = get_shortest_op_index(data);
-	i = -1;
 	optimize_op(data->op[index]);
+	i = -1;
 	while (++i < MAX_SORT)
 	{
 		while (data->op[i])
@@ -47,10 +47,14 @@ static void	sort(t_data *data)
 		sort_three(data, SMALL_I);
 	//else if (data->size_a == 5)
 	//	sort_five(data, TRUE);
-	else if (data->size_a <= 31)
-		sort_radix(data, RADIX_I);
-	//else
-	//	sort_large(data, )
+	//else if (data->size_a <= 31)
+	//	sort_radix(data, RADIX_I);
+	else if (data->size_a <= 20)
+		sort_large(data, 5, 2);
+	else if (data->size_a <= 150)
+		sort_large(data, 20, 10);
+	else
+		sort_large(data, 35, 18);
 }
 
 int	main(int ac, char **av)
