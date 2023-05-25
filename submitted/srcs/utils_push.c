@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 05:09:02 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 12:25:19 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 13:05:00 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,3 @@ int	push_index_ba(t_ui *arr, int size, t_ui nbr)
 			return (++i);
 	}
 }
-
-void	rotate_and_push_ab(int rotate_type)
-{
-	
-}
-/*
-#include <stdio.h>
-int	main(void)
-{
-	t_ui	test[5] = {1, 6, 8};
-
-	printf("%d\n", push_index_btoa(test, 3, 9));
-	return (0);
-}
-*/

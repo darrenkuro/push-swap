@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 12:17:41 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 13:43:28 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,20 @@
 # define STDIN		0
 # define STDERR		2
 # define ERROR_MSG	"Error\n"
-# define MAX_SORT	4
+# define MAX_SORT	10
 # define SMALL_I	0
 # define RADIX_I	1
 # define LARGE_I	2
-# define RARB		1
-# define RRARRB		2
-# define RRARB		3
-# define RARRB		4
 
 typedef struct s_data
 {
 	t_ui	*a;
 	t_ui	*b;
+	t_ui	*og;
 	t_list	*op[MAX_SORT];
 	int		size_a;
 	int		size_b;
+	int		size_og;
 }	t_data;
 
 int		op_exec_pa(t_data *data, int index);
@@ -60,10 +58,11 @@ void	input_parser(int ac, char **av, t_data *data);
 void	sort_three(t_data *data, int index);
 void	sort_five(t_data *data, int index);
 void	sort_ordered(t_data *data, int index);
-void	sort_large(t_data *data, int n, int f);
+void	sort_large(t_data *data, int n, int f, int index);
 int		sort_radix(t_data *data, int index);
 
 void	print_error_exit(const char *msg);
+void	reset_stack(t_data *data);
 int		data_init(int ac, char **av, t_data *data);
 int		get_shortest_op_index(t_data *data);
 

@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:34:28 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 12:23:22 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 13:46:24 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	replace_ra(t_list *start, t_list *end, int rb)
 	}
 }
 
-#include <stdio.h>
 void	replace_rb(t_list *start, t_list *end, int ra)
 {
 	t_list	*temp;
@@ -96,6 +95,8 @@ void	optimize_op(t_list *op)
 	t_list	*start;
 	t_list	*end;
 
+	if (!op)
+		return ;
 	while (op->next)
 	{
 		if (ft_strncmp("pb", (char *) op->content, 2) == 0)
@@ -110,25 +111,3 @@ void	optimize_op(t_list *op)
 		op = op->next;
 	}
 }
-
-/* Optimize a given op list. 
-void	optimize_op(t_list *op)
-{
-	t_list	*temp;
-
-	while (op->next)
-	{
-		if ((ft_strncmp("ra", (char *) op->content, 2) == 0
-				&& ft_strncmp("rb", (char *) op->next->content, 2) == 0)
-			|| (ft_strncmp("rb", (char *) op->content, 2) == 0
-				&& ft_strncmp("ra", (char *) op->next->content, 2) == 0))
-		{
-			temp = op->next;
-			op->next = op->next->next;
-			op->content = "rr";
-			free(temp);
-		}
-		op = op->next;
-	}
-}
-*/

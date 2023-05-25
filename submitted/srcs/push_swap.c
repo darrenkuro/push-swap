@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:24:29 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 12:29:23 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 14:23:16 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static void	print_free(t_data *data)
 	int		i;
 	int		index;
 
+	i = -1;
+	while (++i < MAX_SORT)
+		optimize_op(data->op[i]);
 	index = get_shortest_op_index(data);
-	optimize_op(data->op[index]);
+	//optimize_op(data->op[index]);
 	i = -1;
 	while (++i < MAX_SORT)
 	{
@@ -35,26 +38,41 @@ static void	print_free(t_data *data)
 	}
 	free(data->a);
 	free(data->b);
+	free(data->og);
 }
 
 static void	sort(t_data *data)
 {
-	if (a_isordered(data))
-		sort_ordered(data, 0);
-	else if (data->size_a == 2)
+	if (data->size_a == 2)
 		op_exec_ra(data, SMALL_I);
 	else if (data->size_a == 3)
 		sort_three(data, SMALL_I);
+	else if (a_isordered(data))
+		sort_ordered(data, 0);
 	//else if (data->size_a == 5)
 	//	sort_five(data, TRUE);
 	//else if (data->size_a <= 31)
 	//	sort_radix(data, RADIX_I);
 	else if (data->size_a <= 20)
-		sort_large(data, 5, 2);
+		sort_large(data, 5, 2, 0);
 	else if (data->size_a <= 150)
-		sort_large(data, 20, 10);
+	{
+		sort_large(data, 20, 10, 0);
+		reset_stack(data);
+		sort_large(data, 22, 8, 1);
+		reset_stack(data);
+		sort_large(data, 25, 12, 2);
+	}
 	else
-		sort_large(data, 35, 18);
+	{
+		sort_large(data, 35, 18, 0);
+		reset_stack(data);
+		sort_large(data, 40, 40, 1);
+		reset_stack(data);
+		sort_large(data, 20, 30, 2);
+		reset_stack(data);
+		sort_radix(data, 3);
+	}
 }
 
 int	main(int ac, char **av)

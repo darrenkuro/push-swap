@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 21:19:40 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 05:40:39 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 13:38:19 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ void	input_parser(int ac, char **av, t_data *data)
 		while (++j < ac - 1)
 			if (ft_atoi(av[i + 1]) > ft_atoi(av[j + 1]))
 				++count;
-		data->a[i] = count;
+		data->og[i] = count;
 	}
 }

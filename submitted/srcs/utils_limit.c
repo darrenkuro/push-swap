@@ -6,11 +6,11 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 05:12:34 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 12:28:28 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/25 13:11:07 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.c"
+#include "push_swap.h"
 
 /* Get the max value of a given array. */
 t_ui	get_max(t_ui *arr, int size)
