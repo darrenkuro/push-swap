@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2023/05/26 09:56:35 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/26 10:07:19 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ BONUS	:=	checker
 
 SRCDIR	:=	srcs
 _SRC	:=	push_swap.c input.c utils.c op_exec1.c op_exec2.c op_exec3.c \
-			sort_algorithm.c \
+			sort.c \
 			utils_calc.c utils_limit.c utils_rotate.c \
 			utils_rotate_count.c optimize_op.c \
 			optimize_rr.c optimize_rrr.c

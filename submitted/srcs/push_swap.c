@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:24:29 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/26 09:52:30 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 10:06:52 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 	if (!data_init(ac, av, &data))
 		print_error_exit(ERROR_MSG);
 	if (array_issorted(data.a, data.size_a))
-		return (SUCCESS);
+		return (print_free(&data), SUCCESS);
 	if (data.size_a == 2)
 		op_exec_ra(&data, 0);
 	else if (data.size_a == 3)
