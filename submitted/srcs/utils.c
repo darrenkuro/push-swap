@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:15:26 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/26 09:49:40 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 10:20:37 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	print_error_exit(const char *msg)
 /* Initialize the data structure, parse the argument into stack a. */
 int	data_init(int ac, char **av, t_data *data)
 {
-
 	data->a = (t_ui *) ft_calloc(ac - 1, sizeof(t_ui));
 	if (!data->a)
 		return (FALSE);

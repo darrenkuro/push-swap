@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 07:06:39 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/26 09:51:37 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 10:20:22 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	rotate_count(int index_a, int size_a, int index_b, int size_b)
 	if (count_rarrb(index_a, index_b, size_b) < min)
 		min = count_rarrb(index_a, index_b, size_b);
 	if (count_rrarb(index_a, size_a, index_b) < min)
-		min = count_rrarb(index_a, size_a, index_b);	
+		min = count_rrarb(index_a, size_a, index_b);
 	return (min);
 }
-

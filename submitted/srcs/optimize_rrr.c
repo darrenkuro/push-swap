@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:34:28 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/26 09:22:04 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 10:21:51 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	replace_rra(t_list *start, t_list *end, int rrb)
 			free(temp);
 			--rrb;
 		}	
-		else if (ft_strncmp("rra", (char *) start->next->content, 3) == 0 && replace)
+		else if (ft_strncmp("rra", (char *) start->next->content, 3) == 0
+			&& replace)
 		{
 			start->next->content = "rrr";
 			start = start->next;
@@ -55,7 +56,8 @@ static void	replace_rrb(t_list *start, t_list *end, int rra)
 			free(temp);
 			--rra;
 		}	
-		else if (ft_strncmp("rrb", (char *) start->next->content, 3) == 0 && replace)
+		else if (ft_strncmp("rrb", (char *) start->next->content, 3) == 0
+			&& replace)
 		{
 			start->next->content = "rrr";
 			start = start->next;
@@ -66,7 +68,7 @@ static void	replace_rrb(t_list *start, t_list *end, int rra)
 	}
 }
 
-/* Check if the range has both rra and rrb and optimize it with rrr. */ 
+/* Check if the range has both rra and rrb and optimize it with rrr. */
 void	optimize_rrr(t_list *start, t_list *end)
 {
 	t_list	*temp;
