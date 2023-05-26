@@ -10,3 +10,9 @@
 </p>
 
 - Test in bash so ARG is parsed as multiple arguments; in zsh it's parsed as 1.
+
+### Testers
+
+- https://github.com/laisarena/push_swap_tester
+- https://github.com/gemartin99/Push-Swap-Tester
+- https://github.com/IDC87/push_swap_leak_tester
