@@ -13,6 +13,7 @@
 
 ### Testers
 
+- https://github.com/Vinni-Cedraz/push_swap_averager
 - https://github.com/laisarena/push_swap_tester
 - https://github.com/gemartin99/Push-Swap-Tester
 - https://github.com/IDC87/push_swap_leak_tester
