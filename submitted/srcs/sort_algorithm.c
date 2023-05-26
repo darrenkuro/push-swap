@@ -5,37 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 23:28:24 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 13:03:02 by dlu              ###   ########.fr       */
+/*   Created: 2023/05/25 01:35:03 by dlu               #+#    #+#             */
+/*   Updated: 2023/05/26 07:44:32 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* Calculate the move needed for index in stack a to the correct position. */
-int	calc_move_ab(t_data *data, int index)
+static void	push_ab(t_data *data, int ia, int ib, int index)
 {
-	int	index_b;
+	int	rotate_type;
 
-	index_b = push_index_atob(data->b, data->size_b, data->a[index]);
-	return (rotate_count(index, data->size_a, index_b, data->size_b));	
+	rotate_type = get_rotate_type(ia, data->size_a, ib, data->size_b);
+	if (rotate_type == RARB)
+		rotate_rarb(data, ia, ib, index);
+	else if (rotate_type == RARRB)
+		rotate_rarrb(data, ia, ib, index);
+	else if (rotate_type == RRARB)
+		rotate_rrarb(data, ia, ib, index);
+	else if (rotate_type == RRARRB)
+		rotate_rrarrb(data, ia, ib, index);
+	op_exec_pb(data, index);
 }
 
-/* Get the cheapest index when pushing from a to b. */
-int	cheapest_index_ab(t_data *data)
+static void	push_ba(t_data *data, int index)
 {
-	t_ui	min;
-	int		i;
-	int		index;
+	int	index_a;
+	int	i;
 
+	index_a = push_index_ba(data->a, data->size_a, data->b[0]);
 	i = -1;
-	min = -1;
-	index = -1;
-	while (++i < data->size_a)
-		if (calc_move_atob(data, i) < min)
-		{
-			min = calc_move_atob(data, i);
-			index = i;
-		}
-	return (index);
+	while (index_a > data->size_a / 2 - 1 && ++i < (data->size_a - index_a))
+		op_exec_rra(data, index);
+	while (index_a <= data->size_a / 2 - 1 && ++i < index_a)
+		op_exec_ra(data, index);
+	op_exec_pa(data, index);
+}
+
+void	sort_algorithm(t_data *data, int index)
+{
+	int	ia;
+	int	ib;
+
+	op_exec_pb(data, index);
+	op_exec_pb(data, index);
+	while (data->size_a > 3)
+	{
+		ia = cheapest_index_ab(data);
+		ib = push_index_ab(data->b, data->size_b, data->a[ia]);
+		push_ab(data, ia, ib, index);
+	}
+	sort_three(data, index);
+	while (data->size_b)
+		push_ba(data, index);
+	sort_ordered(data, index);
 }

@@ -1,6 +1,3 @@
 [submodule "visualizer"]
 	path = visualizer
 	url = git@github.com:o-reo/push_swap_visualizer.git
-[submodule "averager"]
-	path = averager
-	url = git@github.com:Vinni-Cedraz/push_swap_averager.git

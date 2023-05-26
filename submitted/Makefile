@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2023/05/25 13:06:35 by dlu              ###   ########.fr        #
+#    Updated: 2023/05/26 07:39:00 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME	:=	push_swap
 BONUS	:=	checker
 
 SRCDIR	:=	srcs
-_SRC	:=	push_swap.c utils.c utils_push.c utils_limit.c input.c \
-			op_exec1.c op_exec2.c op_exec3.c \
-			sort_simple.c sort_radix.c sort_large.c \
-			optimize_op.c optimize_shortcut.c
+_SRC	:=	push_swap.c input.c utils.c op_exec1.c op_exec2.c op_exec3.c \
+			sort_simple.c sort_radix.c sort_large.c sort_algorithm.c \
+			utils_calc_move.c utils_limit.c utils_push.c utils_rotate.c \
+			utils_rotate_count.c optimize_op.c optimize_shortcut.c 
 _BSRC	:=	checker_bonus.c input.c op_exec1.c op_exec2.c op_exec3.c utils.c
 SRC		:=	$(addprefix $(SRCDIR)/, $(_SRC))
 BSRC	:=	$(addprefix $(SRCDIR)/, $(_BSRC))

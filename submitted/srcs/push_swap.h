@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:13:48 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 13:43:28 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 07:54:30 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@
 # define INT_MAXLEN	11
 # define STDIN		0
 # define STDERR		2
-# define ERROR_MSG	"Error\n"
 # define MAX_SORT	10
 # define SMALL_I	0
 # define RADIX_I	1
 # define LARGE_I	2
+
+# define RARB		1
+# define RARRB		2
+# define RRARB		3
+# define RRARRB		4
+
+# define ERROR_MSG	"Error\n"
 
 typedef struct s_data
 {
@@ -58,6 +64,7 @@ void	input_parser(int ac, char **av, t_data *data);
 void	sort_three(t_data *data, int index);
 void	sort_five(t_data *data, int index);
 void	sort_ordered(t_data *data, int index);
+void	sort_algorithm(t_data *data ,int index);
 void	sort_large(t_data *data, int n, int f, int index);
 int		sort_radix(t_data *data, int index);
 
@@ -77,5 +84,19 @@ int		get_min_index(t_ui *arr, int size);
 
 int		push_index_ab(t_ui *arr, int size, t_ui nbr);
 int		push_index_ba(t_ui *arr, int size, t_ui nbr);
+
+void	rotate_rarb(t_data *data, int ia, int ib, int index);
+void	rotate_rarrb(t_data *data, int ia, int ib, int index);
+void	rotate_rrarb(t_data *data, int ia, int ib, int index);
+void	rotate_rrarrb(t_data *data, int ia, int ib, int index);
+
+int		cheapest_index_ab(t_data *data);
+int		get_rotate_type(int index_a, int size_a, int index_b, int size_b);
+int		rotate_count(int ia, int sa, int ib, int sb);
+
+t_ui	count_rarb(int ia, int ib);
+t_ui	count_rarrb(int ia, int ib, int sb);
+t_ui	count_rrarb(int ia, int sa, int ib);
+t_ui	count_rrarrb(int ia, int sa, int ib, int sb);
 
 #endif

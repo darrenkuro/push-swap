@@ -6,30 +6,13 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 01:35:03 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 14:02:42 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 07:19:04 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
-static void	sort_to_b(t_data *data)
-{
-	int	index_a;
-	int	index_b;
-	int	rotate_type;
 
-	op_exec_pb(data, LARGE_I);
-	op_exec_pb(data, LARGE_I);
-	while (data->size_a > 3 && !array_issorted(data->a, data->size_a))
-	{
-		index_a = cheapest_index_ab(data);
-		index_b = push_index_ab(data->b, data->size_b);
-		rotate_type = rotate_type(index_a, data->size_a, index_b, data->size_b);
-
-	}
-}
-*/
-void	push_ab(t_data *data, int index)
+static void	push_ab(t_data *data, int index)
 {
 	int	index_b;
 	int	i;
@@ -43,7 +26,7 @@ void	push_ab(t_data *data, int index)
 	op_exec_pb(data, index);
 }
 
-void	push_ba(t_data *data, int index)
+static void	push_ba(t_data *data, int index)
 {
 	int	index_a;
 	int	i;
@@ -57,7 +40,6 @@ void	push_ba(t_data *data, int index)
 	op_exec_pa(data, index);
 }
 
-#include <stdio.h>
 void	sort_large(t_data *data, int n, int f, int index)
 {
 	int	size;
