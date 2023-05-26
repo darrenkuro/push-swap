@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:00:54 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 12:15:18 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 09:44:46 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	op_exec_ra(t_data *data, int index)
 	while (++i < data->size_a - 1)
 		data->a[i] = data->a[i + 1];
 	data->a[data->size_a - 1] = tmp;
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("ra"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("ra"));
 	return (TRUE);
 }
 
@@ -43,8 +43,8 @@ int	op_exec_rb(t_data *data, int index)
 	while (++i < data->size_b - 1)
 		data->b[i] = data->b[i + 1];
 	data->b[data->size_b - 1] = tmp;
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("rb"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("rb"));
 	return (TRUE);
 }
 
@@ -55,7 +55,7 @@ int	op_exec_rr(t_data *data, int index)
 		return (FALSE);
 	op_exec_ra(data, -1);
 	op_exec_rb(data, -1);
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("rr"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("rr"));
 	return (TRUE);
 }

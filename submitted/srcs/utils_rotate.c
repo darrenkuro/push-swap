@@ -6,11 +6,59 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 07:06:39 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/26 07:53:11 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 09:51:20 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	rotate_rarb(t_data *data, int ia, int ib)
+{
+	int	i;
+
+	i = -1;
+	while (++i < ia)
+		op_exec_ra(data, 0);
+	i = -1;
+	while (++i < ib)
+		op_exec_rb(data, 0);
+}
+
+void	rotate_rarrb(t_data *data, int ia, int ib)
+{
+	int	i;
+
+	i = -1;
+	while (++i < ia)
+		op_exec_ra(data, 0);
+	i = -1;
+	while (++i < data->size_b - ib)
+		op_exec_rrb(data, 0);
+}
+
+void	rotate_rrarb(t_data *data, int ia, int ib)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->size_a - ia)
+		op_exec_rra(data, 0);
+	i = -1;
+	while (++i < ib)
+		op_exec_rb(data, 0);
+}
+
+void	rotate_rrarrb(t_data *data, int ia, int ib)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->size_a - ia)
+		op_exec_rra(data, 0);
+	i = -1;
+	while (++i < data->size_b - ib)
+		op_exec_rrb(data, 0);
+}
 
 /* Get the shortest rotate type. */
 int	get_rotate_type(int index_a, int size_a, int index_b, int size_b)
@@ -35,52 +83,4 @@ int	get_rotate_type(int index_a, int size_a, int index_b, int size_b)
 	if (min == count_rarrb(index_a, index_b, size_b))
 		return (RARRB);
 	return (-1);
-}
-
-void	rotate_rarb(t_data *data, int ia, int ib, int index)
-{
-	int	i;
-
-	i = -1;
-	while (++i < ia)
-		op_exec_ra(data, index);
-	i = -1;
-	while (++i < ib)
-		op_exec_rb(data, index);
-}
-
-void	rotate_rarrb(t_data *data, int ia, int ib, int index)
-{
-	int	i;
-
-	i = -1;
-	while (++i < ia)
-		op_exec_ra(data, index);
-	i = -1;
-	while (++i < data->size_b - ib)
-		op_exec_rrb(data, index);
-}
-
-void	rotate_rrarb(t_data *data, int ia, int ib, int index)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->size_a - ia)
-		op_exec_rra(data, index);
-	i = -1;
-	while (++i < ib)
-		op_exec_rb(data, index);
-}
-
-void	rotate_rrarrb(t_data *data, int ia, int ib, int index)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->size_a - ia)
-		op_exec_rra(data, index);
-	i = -1;
-	while (++i < data->size_b - ib)
-		op_exec_rrb(data, index);
 }

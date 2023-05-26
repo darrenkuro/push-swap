@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 22:00:54 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 13:35:56 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 09:44:14 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	op_exec_pa(t_data *data, int index)
 		data->b[i] = data->b[i + 1];
 	(data->size_a)++;
 	(data->size_b)--;
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("pa"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("pa"));
 	return (TRUE);
 }
 
@@ -50,8 +50,8 @@ int	op_exec_pb(t_data *data, int index)
 	data->a[i] = 0;
 	(data->size_b)++;
 	(data->size_a)--;
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("pb"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("pb"));
 	return (TRUE);
 }
 
@@ -65,8 +65,8 @@ int	op_exec_sa(t_data *data, int index)
 	temp = data->a[0];
 	data->a[0] = data->a[1];
 	data->a[1] = temp;
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("sa"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("sa"));
 	return (TRUE);
 }
 
@@ -80,8 +80,8 @@ int	op_exec_sb(t_data *data, int index)
 	temp = data->b[0];
 	data->b[0] = data->b[1];
 	data->b[1] = temp;
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("sb"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("sb"));
 	return (TRUE);
 }
 
@@ -92,7 +92,7 @@ int	op_exec_ss(t_data *data, int index)
 		return (FALSE);
 	op_exec_sa(data, -1);
 	op_exec_sb(data, -1);
-	if (index >= 0 && index < MAX_SORT)
-		ft_lstadd_back(&data->op[index], ft_lstnew("ss"));
+	if (index >= 0)
+		ft_lstadd_back(&data->op, ft_lstnew("ss"));
 	return (TRUE);
 }

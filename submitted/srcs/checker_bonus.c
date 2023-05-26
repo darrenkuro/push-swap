@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 12:35:39 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 13:00:20 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 09:39:27 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define MAX_OP_CHAR	4
 
-/* 1 for successful operation; 0 for failed or incorrect operation. */
+/* Execute the command, return 1 if successful, 0 if failed or incorrect op. */
 static int	op_exec(t_data *data, char *op)
 {
 	if (ft_strncmp(op, "pa", MAX_OP_CHAR) == 0)
@@ -54,6 +54,7 @@ static void	load_args(int ac, char **av, t_data *data)
 		print_error_exit(ERROR_MSG);
 }
 
+/* Check the operations on stdin succesfully sort the data. */
 int	main(int ac, char **av)
 {
 	int		i;

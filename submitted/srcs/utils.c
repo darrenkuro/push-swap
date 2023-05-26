@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:15:26 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/25 13:33:37 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 09:49:40 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,9 @@ void	print_error_exit(const char *msg)
 	exit(FAILURE);
 }
 
-void	reset_stack(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->size_og)
-		data->a[i] = data->og[i];
-	data->size_a = data->size_og;
-	i = -1;
-	while (++i < data->size_og)
-		data->b[i] = 0;
-	data->size_b = 0;
-}
-
 /* Initialize the data structure, parse the argument into stack a. */
 int	data_init(int ac, char **av, t_data *data)
 {
-	int	i;
 
 	data->a = (t_ui *) ft_calloc(ac - 1, sizeof(t_ui));
 	if (!data->a)
@@ -44,41 +29,11 @@ int	data_init(int ac, char **av, t_data *data)
 	data->b = (t_ui *) ft_calloc(ac - 1, sizeof(t_ui));
 	if (!data->b)
 		return (free(data->a), FALSE);
-	data->og = (t_ui *) ft_calloc(ac - 1, sizeof(t_ui));
-	if (!data->og)
-		return (free(data->a), free(data->b), FALSE);
-	i = -1;
-	while (++i < MAX_SORT)
-		data->op[i] = NULL;
-	data->size_og = ac - 1;
-	data->size_a = 0;
+	data->op = NULL;
+	data->size_a = ac - 1;
 	data->size_b = 0;
 	input_parser(ac, av, data);
-	reset_stack(data);
 	return (TRUE);
-}
-
-/* Get the shortest op index from data, -1 for error. */
-int	get_shortest_op_index(t_data *data)
-{
-	int	i;
-	int	min;
-	int	index;
-
-	min = 0;
-	index = -1;
-	i = -1;
-	while (++i < MAX_SORT)
-	{
-		if (!ft_lstsize(data->op[i]))
-			continue ;
-		if (ft_lstsize(data->op[i]) < min || !min)
-		{
-			min = ft_lstsize(data->op[i]);
-			index = i;
-		}
-	}
-	return (index);
 }
 
 /* Check if an array is sorted of it's given size. */

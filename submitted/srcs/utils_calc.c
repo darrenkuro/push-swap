@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_calc_move.c                                  :+:      :+:    :+:   */
+/*   utils_calc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 23:28:24 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/26 07:46:54 by dlu              ###   ########.fr       */
+/*   Updated: 2023/05/26 09:50:19 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,49 @@ static t_ui	calc_move_ab(t_data *data, int index)
 	return (rotate_count(index, data->size_a, index_b, data->size_b));
 }
 
-/* Calculate the move needed for index in stack b to the correct position.
-static t_ui calc_move_ba(t_data *data, int index)
-{
-	int	index_a;
 
-	index_a = push_index_ba(data->a, data->size_a, data->b[index]);
-	return (rotate_count(index_a, data->size_a, index, data->size_b));
+/* Get the correct index for pushing nbr pushing to stack a. */
+int	push_index_ab(t_ui *arr, int size, t_ui nbr)
+{
+	int	i;
+
+	if (nbr > arr[0] && nbr < arr[size - 1])
+		return (0);
+	else if ((nbr > get_max(arr, size) || nbr < get_min(arr, size)))
+		return (get_max_index(arr, size));
+	else
+	{
+		i = 0;
+		while (i < size && (arr[i] < nbr || arr[i + 1] > nbr))
+			++i;
+		if (i == size)
+			return (0);
+		else
+			return (++i);
+	}
 }
-*/
+
+/* Get the correct index for pushing nbr to stack a. */
+int	push_index_ba(t_ui *arr, int size, t_ui nbr)
+{
+	int	i;
+
+	if (nbr < arr[0] && nbr > arr[size - 1])
+		return (0);
+	else if ((nbr > get_max(arr, size) || nbr < get_min(arr, size)))
+		return (get_min_index(arr, size));
+	else
+	{
+		i = 0;
+		while (i < size && (arr[i] > nbr || arr[i + 1] < nbr))
+			++i;
+		if (i == size)
+			return (0);
+		else
+			return (++i);
+	}
+}
+
 /* Get the cheapest index when pushing from a to b. */
 int	cheapest_index_ab(t_data *data)
 {
