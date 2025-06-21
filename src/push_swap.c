@@ -6,7 +6,7 @@
 /*   By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 20:24:29 by dlu               #+#    #+#             */
-/*   Updated: 2023/05/26 10:06:52 by dlu              ###   ########.fr       */
+/*   Updated: 2025/06/20 21:55:34 by dlu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 static void	print_free(t_data *data)
 {
 	t_list	*temp;
-	int		i;
 
-	i = -1;
 	optimize_op(data->op);
 	while (data->op)
 	{
