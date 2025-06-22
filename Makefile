@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2025/06/22 01:00:40 by dlu              ###   ########.fr        #
+#    Updated: 2025/06/22 06:26:09 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,11 @@ LIBDIR	:=	libft
 _LIBFT	:=	libft.a
 LIBFT	:=	$(addprefix $(LIBDIR)/, $(_LIBFT))
 
+VISDIR	:=	visualizer
+VBUILD	:=	$(VISDIR)/build
+VISBIN	:=	$(VISDIR)/bin/visualizer
+VISLINK	:=	run-visualizer
+
 CC			:=	cc
 RM			:=	/bin/rm -f
 CFLAGS		:=	-Wall -Wextra -Werror -g -MMD -MP
@@ -47,7 +52,7 @@ PAD_WIDTH	?=	22
 .DEFAULT_GOAL	:=	all
 
 .PHONY: all
-all: $(TARGET1) $(TARGET2)
+all: $(TARGET1) $(TARGET2) $(VISLINK)
 
 .PHONY: bonus
 bonus: $(TARGET2)
@@ -64,6 +69,8 @@ fclean: clean
 	@$(RM) $(TARGET1) $(TARGET2)
 	@echo " ✅ "
 	@$(MAKE) -C $(LIBDIR) $@ PAD_WIDTH=$(PAD_WIDTH)
+	@$(RM) -r $(VBUILD) && $(RM) $(VISBIN) $(VISLINK)
+	@git submodule deinit -f --all
 
 .PHONY: re
 re: fclean all
@@ -71,6 +78,11 @@ re: fclean all
 .PHONY: var-%
 var-%:
 	@echo $($*)
+
+.PHONY: submodule
+submodule:
+	@printf "%-*s 🔄 Initializing and updating git submodules...\n" $(PAD_WIDTH) "$(PROJECT)"
+	@git submodule update --init --recursive | sed 's/^/    - /'
 
 $(OBJDIR):
 	@printf "%-*s 📁 Creating obj directory..." $(PAD_WIDTH) "$(PROJECT)"
@@ -92,11 +104,14 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 	@echo " ✅ "
 
-$(LIBFT):
-	@printf "$(PROJECT) 🔄 Initializing and updating git submodules..."
-	@git submodule update --init --recursive
-	@echo " ✅ "
-	@echo "$(PROJECT) ⚙️ Building libft..."
+$(LIBFT): | submodule
+	@printf "%-*s ⚙️ Building libft...\n" $(PAD_WIDTH) "$(PROJECT)"
 	@$(MAKE) -C $(LIBDIR) --silent PAD_WIDTH=$(PAD_WIDTH)
+
+$(VISLINK): | submodule
+	@printf "%-*s ⚙️ Building $@...\n" $(PAD_WIDTH) "$(PROJECT)"
+	@mkdir -p "$(VBUILD)"
+	@cd "$(VBUILD)" && cmake .. && make
+	@ln -sf "$(VISBIN)" $(VISLINK)
 
 -include $(OBJ:.o=.d)
