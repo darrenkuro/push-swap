@@ -6,7 +6,7 @@
 #    By: dlu <dlu@student.42berlin.de>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 10:49:05 by dlu               #+#    #+#              #
-#    Updated: 2025/06/22 08:55:14 by dlu              ###   ########.fr        #
+#    Updated: 2025/06/22 09:14:07 by dlu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,10 +48,8 @@ CPPFLAGS	:=	-I $(INCDIR) -I $(LIBDIR)/$(INCDIR)
 LDFLAGS		:=	-L $(LIBDIR)
 LDLIBS		:=	-lft
 
-PAD_WIDTH	?=	22
-
+PAD_WIDTH		?=	22
 .DEFAULT_GOAL	:=	all
-
 .SILENT:
 
 define submodule-target
@@ -116,7 +114,7 @@ $(VISDIR)-fclean:
 .PHONY:	fclean
 fclean:	clean $(LIBDIR)-fclean $(VISDIR)-fclean $(LIBDIR)-deinit $(VISDIR)-deinit
 	if [ -f "$(TARGET1)" ] || [ -f "$(TARGET2)" ]; then \
-		printf "%-*s 🗑️ Removing binary..." $(PAD_WIDTH) "$(PROJECT)"; \
+		printf "%-*s 🗑️ Removing binaries..." $(PAD_WIDTH) "$(PROJECT)"; \
 		$(RM) $(TARGET1) $(TARGET2); \
 		echo " ✅ "; \
 	fi
