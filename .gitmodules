@@ -1,6 +1,8 @@
 [submodule "visualizer"]
 	path = visualizer
 	url = https://github.com/darrenkuro/push-swap-visualizer.git
+    branch = master
 [submodule "libft"]
 	path = libft
 	url = https://github.com/darrenkuro/libft.git
+    branch = main
