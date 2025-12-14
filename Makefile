@@ -19,6 +19,8 @@ TARGET2	:=	checker
 SRCDIR	:=	src
 OBJDIR	:=	obj
 INCDIR	:=	include
+LIBDIR	:=	libft
+VISDIR	:=	visualizer
 
 # ------------------------ Files
 _SRC	:=	push_swap.c input.c utils.c op_exec1.c op_exec2.c op_exec3.c \
@@ -27,71 +29,74 @@ _SRC	:=	push_swap.c input.c utils.c op_exec1.c op_exec2.c op_exec3.c \
 _SRC_B	:=	checker_bonus.c input.c op_exec1.c op_exec2.c op_exec3.c utils.c
 SRC		:=	$(addprefix $(SRCDIR)/,$(_SRC))
 SRC_B	:=	$(addprefix $(SRCDIR)/,$(_SRC_B))
-
 _OBJ	:=	$(_SRC:.c=.o)
 _OBJ_B	:=	$(_SRC_B:.c=.o)
-OBJ		:=	$(addprefix $(OBJDIR)/,$(OBJ))
+OBJ		:=	$(addprefix $(OBJDIR)/,$(_OBJ))
 OBJ_B	:=	$(addprefix $(OBJDIR)/,$(_OBJ_B))
 
-LIBDIR	:=	libft
 LIBFT_A	:=	libft.a
 LIBFT	:=	$(LIBDIR)/$(LIBFT_A)
 
-VISDIR	:=	visualizer
 VBUILD	:=	$(VISDIR)/build
 _VISBIN	:=	visualizer
 VISBIN	:=	$(VBUILD)/bin/$(_VISBIN)
 VISLINK	:=	run-visualizer
 
+# ------------------------ Toolchain & Flags
 CC			:=	cc
 RM			:=	rm -f
-CFLAGS		:=	-Wall -Wextra -Werror -g -MMD -MP
+CFLAGS		:=	-Wall -Wextra -Werror -MMD -MP
 CPPFLAGS	:=	-I $(INCDIR) -I $(LIBDIR)/$(INCDIR)
 LDFLAGS		:=	-L $(LIBDIR)
 LDLIBS		:=	-lft
 
-PADDING		?=	11
+# ------------------------ Build Settings
 .DEFAULT_GOAL	:=	all
 
+PAD		?=	11
+DEBUG	?=	0
+ifeq ($(DEBUG),1)
+	CFLAGS	+=	-g
+endif
+
+# ------------------------ Rules & Targets
 define submodule-target
 .PHONY:	$1-init
 $1-init:
-	if git submodule status "$1" | grep -Eq '^[-+]'; then \
-		printf "%-*s 🔄 Initializing submodule $1...\n" $$(PADDING) "[$$(NAME)]"; \
-		{ git submodule update --init --recursive $1 2>&1 || exit $$?; } | \
-		sed 's/^/    - /'; \
-		printf "%-*s ✅ Git submodule $1 initialized.\n" $$(PADDING) "[$$(NAME)]"; \
+	@if git submodule status "$1" | grep -Eq '^[-+]'; then \
+		printf "%-*s 🔄 Initializing submodule $1...\n" $$(PAD) "[$$(NAME)]"; \
+		set -o pipefail; git submodule update --init --recursive $1 2>&1 | \
+		sed 's/^/    - /' || exit $$?; \
+		printf "%-*s ✅ Git submodule $1 initialized.\n" $$(PAD) "[$$(NAME)]"; \
 	fi
 
 .PHONY:	$1-deinit
 $1-deinit:
 	if [ -f "$1/.git" ]; then \
 		printf "%-*s 🧹 Deinitializing $1 submodule...\n" \
-		$$(PADDING) "[$$(NAME)]"; \
-		{ git submodule deinit -f $1 2>&1 || exit $$?; } | sed 's/^/    - /'; \
+		$$(PAD) "[$$(NAME)]"; \
+		set -o pipefail; git submodule deinit -f $1 2>&1 | \
+		sed 's/^/    - /' || exit $$?; \
 		printf "%-*s ✅ Git submodule $1 deinitialized.\n" \
-		$$(PADDING) "[$$(NAME)]"; \
+		$$(PAD) "[$$(NAME)]"; \
 	fi
 
 .PHONY: $1-update
 $1-update:
 	if [ -f "$1/.git" ]; then \
-		printf "%-*s ⬆️  Pulling latest commits for submodule $1...\n" $$(PADDING) "[$$(NAME)]"; \
-		set -o pipefail; \
-		if { git submodule update --remote --merge $1 2>&1 || exit $$?; } | sed 's/^/    - /'; then \
-			printf "%-*s ✅ $1 submodule updated to latest commit.\n" $$(PADDING) "[$$(NAME)]"; \
-		else \
-			printf "%-*s ❌ Failed to update $1 submodule.\n" $$(PADDING) "[$$(NAME)]"; \
-			exit 1; \
-		fi \
+		printf "%-*s ⬆️  Pulling latest commits for submodule $1...\n" \
+		$$(PAD) "[$$(NAME)]"; \
+		set -o pipefail; git submodule update --remote --merge $1 2>&1 | sed 's/^/    - /' || exit $$?; \
+			printf "%-*s ✅ $1 submodule updated to latest commit.\n" $$(PAD) "[$$(NAME)]"; \
 	else \
-		printf "%-*s ⚠️ $1 submodule not initialized. Run '$1-init' first.\n" $$(PADDING) "[$$(NAME)]"; \
+		printf "%-*s ⚠️ $1 submodule not initialized. Run '$1-init' first.\n" $$(PAD) "[$$(NAME)]"; \
 	fi
 endef
 
 $(eval $(call submodule-target,$(LIBDIR)))	# Generate rules for libft
 $(eval $(call submodule-target,$(VISDIR)))	# Generate rules for visualizer
 
+# ------------------------ Rules & Targets
 .PHONY:	all
 all:	$(TARGET1) $(TARGET2) $(VISLINK)
 
@@ -100,29 +105,29 @@ bonus:	$(TARGET2)
 
 .PHONY:	$(LIBDIR)-clean
 $(LIBDIR)-clean:
-	if [ -f $(LIBDIR)/Makefile ]; then \
-		$(MAKE) -C $(LIBDIR) clean PADDING=$(PADDING); \
+	@if [ -f $(LIBDIR)/Makefile ]; then \
+		$(MAKE) -C $(LIBDIR) clean PAD=$(PAD); \
 	fi
 
 .PHONY:	clean
 clean:	$(LIBDIR)-clean
-	if [ -d $(OBJDIR) ]; then \
-		printf "%-*s 🧹 Removing $(OBJDIR)/..." $(PADDING) "[$(NAME)]"; \
+	@if [ -d $(OBJDIR) ]; then \
+		printf "%-*s 🧹 Removing $(OBJDIR)/..." $(PAD) "[$(NAME)]"; \
 		$(RM) -r $(OBJDIR); \
 		echo " ✅ "; \
 	fi
 
 .PHONY:	$(LIBDIR)-fclean
 $(LIBDIR)-fclean:
-	if [ -f "$(LIBDIR)/Makefile" ]; then \
-		$(MAKE) -C $(LIBDIR) fclean PADDING=$(PADDING); \
+	@if [ -f "$(LIBDIR)/Makefile" ]; then \
+		$(MAKE) -C $(LIBDIR) fclean PAD=$(PAD); \
 	fi
 
 .PHONY:	$(VISDIR)-fclean
 $(VISDIR)-fclean:
-	if [ -d $(VBUILD) ]; then \
+	@if [ -d $(VBUILD) ]; then \
 		printf "%-*s 🧹 Removing build files, binary, and symlink for visualizer..." \
-		$(PADDING) "[$(NAME)]"; \
+		$(PAD) "[$(NAME)]"; \
 		$(RM) -r $(VBUILD); \
 		$(RM) "$(VISLINK)"; \
 		echo " ✅ "; \
@@ -130,8 +135,8 @@ $(VISDIR)-fclean:
 
 .PHONY:	fclean
 fclean:	clean $(LIBDIR)-fclean $(VISDIR)-fclean $(LIBDIR)-deinit $(VISDIR)-deinit
-	if [ -f "$(TARGET1)" ] || [ -f "$(TARGET2)" ]; then \
-		printf "%-*s 🗑️ Removing binaries..." $(PADDING) "[$(NAME)]"; \
+	@if [ -f "$(TARGET1)" ] || [ -f "$(TARGET2)" ]; then \
+		printf "%-*s 🗑️ Removing binaries..." $(PAD) "[$(NAME)]"; \
 		$(RM) $(TARGET1) $(TARGET2); \
 		echo " ✅ "; \
 	fi
@@ -141,45 +146,44 @@ re:	fclean all
 
 .PHONY:	var-%
 var-%:
-	echo $($*)
+	@echo $($*)
 
 $(OBJDIR):
-	printf "%-*s 📁 Creating obj directory..." $(PADDING) "[$(NAME)]"
-	mkdir -p $@
-	echo " ✅ "
+	@printf "%-*s 📁 Creating obj directory..." $(PAD) "[$(NAME)]"
+	@mkdir -p $@
+	@echo " ✅ "
 
 $(TARGET1):	$(LIBFT) $(OBJ)
-	printf "%-*s 🛠️ Building binary: $@" $(PADDING) "[$(NAME)]"
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) $(LDLIBS)
-	echo " ✅ "
+	@printf "%-*s 🛠️ Building binary: $@" $(PAD) "[$(NAME)]"
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) $(LDLIBS)
+	@echo " ✅ "
 
 $(TARGET2):	$(LIBFT) $(OBJ_B)
-	printf "%-*s 🛠️ Building binary: $@" $(PADDING) "[$(NAME)]"
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $(BOBJ) $(LDFLAGS) $(LDLIBS)
-	echo " ✅ "
+	@printf "%-*s 🛠️ Building binary: $@" $(PAD) "[$(NAME)]"
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $(OBJ_B) $(LDFLAGS) $(LDLIBS)
+	@echo " ✅ "
 
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c | $(OBJDIR)
-	printf "%-*s ⚙️ Compiling: $<..." $(PADDING) "[$(NAME)]"
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
-	echo " ✅ "
+	@printf "%-*s ⚙️ Compiling: $<..." $(PAD) "[$(NAME)]"
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+	@echo " ✅ "
 
 $(LIBFT):	| $(LIBDIR)-init
-	printf "%-*s ⚙️ Building $(LIBFT_A)...\n" $(PADDING) "[$(NAME)]"
-	$(MAKE) -C "$(LIBDIR)" --silent PADDING=$(PADDING)
-	printf "%-*s ✅ $(LIBFT_A) built.\n" $(PADDING) "[$(NAME)]"
+	@printf "%-*s ⚙️ Building $(LIBFT_A)...\n" $(PAD) "[$(NAME)]"
+	@$(MAKE) -C "$(LIBDIR)" --silent PAD=$(PAD)
+	@printf "%-*s ✅ $(LIBFT_A) built.\n" $(PAD) "[$(NAME)]"
 
 $(VISBIN):	| $(VISDIR)-init
-	printf "%-*s ⚙️ Building $(_VISBIN)...\n" $(PADDING) "[$(NAME)]"
-	mkdir -p "$(VBUILD)"
-	{ cmake "$(VISDIR)" -B "$(VBUILD)" 2>&1 || exit $$?; } | sed 's/^/    /'
-	{ $(MAKE) -C "$(VBUILD)" 2>&1 || exit $$?; } | sed 's/^/    /'
-	printf "%-*s ✅ $(_VISBIN) built.\n" $(PADDING) "[$(NAME)]"
+	@printf "%-*s ⚙️ Building $(_VISBIN)...\n" $(PAD) "[$(NAME)]"
+	@mkdir -p "$(VBUILD)"
+	@set -o pipefail; cmake "$(VISDIR)" -B "$(VBUILD)" 2>&1 | sed 's/^/    /'
+	@set -o pipefail; $(MAKE) -C "$(VBUILD)" 2>&1 | sed 's/^/    /'
+	@printf "%-*s ✅ $(_VISBIN) built.\n" $(PAD) "[$(NAME)]"
 
 $(VISLINK):	$(VISBIN)
-	@printf "%-*s 🔗 Symlinking $(_VISBIN) to $(VISLINK)..." $(PADDING) "[$(NAME)]"
+	@printf "%-*s 🔗 Symlinking $(_VISBIN) to $(VISLINK)..." $(PAD) "[$(NAME)]"
 	@ln -sf "$(VISBIN)" "$(VISLINK)"
 	@echo " ✅ "
 
-.SILENT:
 .DELETE_ON_ERROR:	# Delete target build that's imcomplete
 -include $(OBJ:.o=.d)

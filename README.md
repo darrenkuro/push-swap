@@ -28,6 +28,9 @@ Briefly explain what this project does and why it exists.
 ## 🛠️ Configuration
 
 ### Prerequisites
+- gcc or clang
+- gnumake
+- cmake (for visualizer)
 
 ### Installation & Usage
 
