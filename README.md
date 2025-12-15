@@ -44,6 +44,7 @@ git commit -m "Update libft"
 ```
 
 The update target runs `git submodule update --remote --merge` under the hood.
+
 ---
 
 ## 📝 Notes & Lessons
